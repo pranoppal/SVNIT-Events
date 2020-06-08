@@ -10,8 +10,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^5.5.2",
+    "@react-navigation/native": "^5.5.1",
+    "@react-navigation/stack": "^5.4.2",
+    "axios": "^0.19.2",
+    "easy-peasy": "^3.3.0",
+    "jetifier": "^1.6.5",
+    "lodash-es": "^4.17.15",
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "0.62.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-navigation": "^4.3.9"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
