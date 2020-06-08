@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Clubs from '../src/containers/clubs/Clubs';
 const HomeStack = createStackNavigator();
 
-const HomeNavigator = ({navigation}) => (
+const ClubNavigator = ({navigation}) => (
   <HomeStack.Navigator>
     <HomeStack.Screen
       name="Clubs"
@@ -14,4 +14,4 @@ const HomeNavigator = ({navigation}) => (
   </HomeStack.Navigator>
 );
 
-export default HomeNavigator;
+export default ClubNavigator;

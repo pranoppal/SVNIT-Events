@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Events from '../src/containers/events/Events';
 const HomeStack = createStackNavigator();
 
-const HomeNavigator = ({navigation}) => (
+const EventNavigator = ({navigation}) => (
   <HomeStack.Navigator>
     <HomeStack.Screen
       name="Events"
@@ -14,4 +14,4 @@ const HomeNavigator = ({navigation}) => (
   </HomeStack.Navigator>
 );
 
-export default HomeNavigator;
+export default EventNavigator;

@@ -36,8 +36,9 @@ const BottomTabNavigator = () => (
       <Tab.Screen
         name="Clubs"
         component={ClubNavigator}
+        headerMode="none"
         options={{
-          tabBarLabel: 'CLubs',
+          tabBarLabel: 'Clubs',
           tabBarColor: '#1f65ff',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-school" color={color} size={26} />
