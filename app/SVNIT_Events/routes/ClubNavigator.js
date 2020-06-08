@@ -9,14 +9,6 @@ const HomeNavigator = ({navigation}) => (
     <HomeStack.Screen
       name="Clubs"
       component={Clubs}
-      options={{
-        title: "SMJHO",
-        headerTitleAlign: 'center',
-        headerTitleStyle:{
-          fontFamily:'Helvetica',
-          fontWeight:'700',
-        },
-      }}
     />
     
   </HomeStack.Navigator>
