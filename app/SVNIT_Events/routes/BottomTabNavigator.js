@@ -41,7 +41,7 @@ const BottomTabNavigator = () => (
           tabBarLabel: 'Clubs',
           tabBarColor: '#1f65ff',
           tabBarIcon: ({ color }) => (
-            <Icon name="ios-school" color={color} size={26} />
+            <Icon name="ios-business" color={color} size={26} />
           ),
         }}
       />
