@@ -15,13 +15,14 @@ def getClubs():
 
 def getEvents():
     query = """query MyQuery {
-        event_events {
-            id
-            name
-            startTime
-            venue
-        }
-    }"""
+            event_events {
+                club
+                id
+                name
+                startTime
+                venue
+            }
+        }"""
     return getDataFromHasura(query)
 
 
