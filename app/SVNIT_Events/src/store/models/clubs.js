@@ -1,5 +1,5 @@
 import {thunk, action} from 'easy-peasy';
-import {getClubsAPI} from '../../restApi/clubs';
+import {getClubsAPI} from '../../restApi';
 import {persist} from 'easy-peasy';
 export default persist(
   {
