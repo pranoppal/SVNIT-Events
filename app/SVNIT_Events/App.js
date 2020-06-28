@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native'
 const prefix = 'https://';
 
 export default () => {
-  console.log('this is the store', store);
   return (
     <StoreProvider uriPrefix={prefix} store={store}>
     <NavigationContainer>

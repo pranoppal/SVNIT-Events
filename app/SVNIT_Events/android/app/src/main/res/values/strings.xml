@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SVNIT_Events</string>
+    <string name="facebook_app_id">630796424198788</string>
+    <string name="fb_login_protocol_scheme">fb630796424198788</string>
+
 </resources>
