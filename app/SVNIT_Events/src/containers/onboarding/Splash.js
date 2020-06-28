@@ -2,18 +2,19 @@ import {useStoreState} from 'easy-peasy';
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
 
-export default SplashScreen = props => {
-  const user = useStoreState(state => state.user);
+export default function Splash({navigation}) {
+//   const user = useStoreState(state => state.user);
 
   useEffect(() => {
     setTimeout(() => {
-      if (user.userId) {
-        props.navigation.navigate('HomePage');
-      } else {
-        props.navigation.navigate('LoginScreen');
-      }
+    //   if (user.userId) {
+    //     props.navigation.navigate('HomePage');
+    //   } else {
+    //     props.navigation.navigate('LoginScreen');
+    //   }
+    navigation.navigate('BottomTabNavigator');
     }, 3000);
-  }, [user, user.userId]);
+  }, []);
 
   return (
     <View
@@ -29,7 +30,7 @@ export default SplashScreen = props => {
           alignItems: 'center',
           flex: 1,
         }}>
-        <Image style={styles.logo} source={require('../assets/logo.png')} />
+        <Image style={styles.logo} source={require('../../../assets/chrd.png')} />
       </View>
     </View>
   );

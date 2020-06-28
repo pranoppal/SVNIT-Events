@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Image,
+  ScrollView,
+} from 'react-native';
 import {useStoreState, useStoreActions} from 'easy-peasy';
 import {isEmpty} from 'lodash-es';
 import Feather from 'react-native-vector-icons/Feather';
@@ -22,11 +29,17 @@ export default function Events() {
       const cards = events.map((event, index) => {
         return (
           <View key={index} style={styles.cardContainer}>
-            <View style={{flex: 2, flexDirection: 'row',marginHorizontal:24,marginTop:24,}}>
+            <View
+              style={{
+                flex: 2,
+                flexDirection: 'row',
+                marginHorizontal: 24,
+                marginTop: 24,
+              }}>
               <View style={{flex: 1.5}}>
                 <Image
                   source={require('../../../assets/chrd.png')}
-                  style={{height: 60, width: 75,borderRadius:5}}
+                  style={{height: 60, width: 75, borderRadius: 5}}
                 />
               </View>
               <View style={{flex: 2}}>
@@ -39,15 +52,22 @@ export default function Events() {
                 flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginHorizontal:24,
-                marginVertical:8,
-                alignItems:'center'
+                marginHorizontal: 24,
+                marginVertical: 8,
+                alignItems: 'center',
               }}>
-              <View style={{flexDirection:'row',flex:1,alignItems:'center'}}>
+              <View
+                style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
                 <Feather name="clock" size={20} />
                 <Text style={styles.eventDetailText}>5PM</Text>
               </View>
-              <View style={{flexDirection:'row',flex:1,justifyContent:'flex-end',alignItems:'center'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                }}>
                 <EvilIcons name="location" size={24} />
                 <Text style={styles.eventDetailText}>{event.venue}</Text>
               </View>
@@ -59,10 +79,12 @@ export default function Events() {
     } else return null;
   };
   return !isLoading ? (
-    <View style={styles.mainContainer}>
-      <Text style={styles.eventsTitleText}>Events</Text>
-      {showEventCards()}
+    <ScrollView>
+      <View style={styles.mainContainer}>
+        <Text style={styles.eventsTitleText}>Events</Text>
+        {showEventCards()}
       </View>
+    </ScrollView>
   ) : (
     <View style={styles.mainContainer}>
       <ActivityIndicator
@@ -79,41 +101,41 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#efeeee',
     alignItems: 'center',
-    marginHorizontal:24,
-    marginVertical:16,
+    marginHorizontal: 24,
+    marginVertical: 16,
   },
   activityIndicator: {
-    position:'absolute',
-    top:0,
-    bottom:0,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
   },
   cardContainer: {
     backgroundColor: '#fff',
-    borderRadius:12,
-    width:'100%',
-    height:150,
-    marginBottom:24,
+    borderRadius: 12,
+    width: '100%',
+    height: 150,
+    marginBottom: 24,
   },
-  eventsTitleText:{
-    fontSize:24,
-    fontFamily:'Helvetica',
-    fontWeight:'bold',
-    textAlign:'center',
-    marginBottom:16,
+  eventsTitleText: {
+    fontSize: 24,
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 16,
   },
-  eventClubText:{
-    fontSize:18,
-    fontFamily:'Nunito-Regular'
+  eventClubText: {
+    fontSize: 18,
+    fontFamily: 'Nunito-Regular',
   },
-  eventDetailText:{
-    fontSize:16,
-    fontFamily:'Nunito-Regular',
-    textAlignVertical:'center',
-    marginStart:4,
-    marginBottom:3,
+  eventDetailText: {
+    fontSize: 16,
+    fontFamily: 'Nunito-Regular',
+    textAlignVertical: 'center',
+    marginStart: 4,
+    marginBottom: 3,
   },
-  eventNameText:{
-    fontSize:20,
-    fontFamily:'Helvetica'
-  }
+  eventNameText: {
+    fontSize: 20,
+    fontFamily: 'Helvetica',
+  },
 });
