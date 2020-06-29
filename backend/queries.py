@@ -25,14 +25,31 @@ def getEvents():
         }"""
     return getDataFromHasura(query)
 
+def insertUser(obj):
+    query = """
+        mutation MyMutation($name: String, $token: String) {
+            insert_user_users(objects: {name: $name, token: $token}) {
+                returning {
+                id
+                name
+                }
+            }
+        }
+    """
+    return postDataIntoHasura(query,obj)
+
+url = 'https://svr-events.herokuapp.com/v1/graphql'
 
 def getDataFromHasura(query):
     try:
-        url = 'https://svr-events.herokuapp.com/v1/graphql'
         r = requests.post(url, headers={"x-hasura-admin-secret":"events", "content-type":"application/json"}, json={'query': query})
-        print(r.status_code)
-        print(r.text)
         return r.text
     except Exception as e:
-        print(e)
-        return "Error"
+        return e
+
+def postDataIntoHasura(query, data):
+    try:
+        r = requests.post(url, headers={"x-hasura-admin-secret":"events", "content-type":"application/json"}, json={'query': query, 'variables':data})
+        return r.text
+    except Exception as e:
+        return e
