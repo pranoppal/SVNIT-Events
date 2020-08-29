@@ -15,14 +15,14 @@ def getClubs():
 
 def getEvents():
     query = """query MyQuery {
-            event_events {
-                club
-                id
-                name
-                startTime
-                venue
-            }
-        }"""
+                    event_events {
+                        club
+                        id
+                        name
+                        startTime
+                        venue
+                    }
+                }"""
     return getDataFromHasura(query)
 
 def insertUser(obj):
@@ -39,17 +39,17 @@ def insertUser(obj):
     return postDataIntoHasura(query,obj)
 
 url = 'https://svr-events.herokuapp.com/v1/graphql'
-
+headers = {"x-hasura-admin-secret":"events", "content-type":"application/json"}
 def getDataFromHasura(query):
     try:
-        r = requests.post(url, headers={"x-hasura-admin-secret":"events", "content-type":"application/json"}, json={'query': query})
+        r = requests.post(url, headers = headers, json={'query': query})
         return r.text
     except Exception as e:
         return e
 
 def postDataIntoHasura(query, data):
     try:
-        r = requests.post(url, headers={"x-hasura-admin-secret":"events", "content-type":"application/json"}, json={'query': query, 'variables':data})
+        r = requests.post(url, headers = headers, json={'query': query, 'variables':data})
         return r.text
     except Exception as e:
         return e

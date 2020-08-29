@@ -1,8 +1,10 @@
 from flask import Flask,request
 import pandas as pd
-from queries import getClubs, getEvents, insertUser, getUser
+from flask_cors import CORS
+from queries import getClubs, getEvents, insertUser
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def index():
@@ -19,6 +21,7 @@ def getEventsController():
 
 @app.route("/insertUser" , methods=['POST'])
 def insertUserController():
+    print("asdfasd")
     obj = request.get_json(force=True)
     return insertUser(obj)
 
