@@ -5,7 +5,7 @@ export default persist({
   events: {},
   // currentEvent:{},
   getEvents: thunk((actions, payload) => {
-    return getEventsAPI(payload).then(details => {
+    return getEventsAPI().then(details => {
       return actions.updateDetails(details.data.event_events);
     });
   }),
@@ -16,8 +16,9 @@ export default persist({
   //     return actions.
   //   })
   // })
+
+
   updateDetails: action((state, payload) => {
-    console.log('state',state)
     return {
       ...state,
      events: payload,

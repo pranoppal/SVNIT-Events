@@ -6,11 +6,14 @@ import {
   ActivityIndicator,
   Image,
   ScrollView,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import {useStoreState, useStoreActions} from 'easy-peasy';
 import {isEmpty} from 'lodash-es';
 import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import {AirbnbRating} from 'react-native-ratings';
 
 export default function Events() {
   const {events} = useStoreState(state => state.events);
@@ -39,12 +42,29 @@ export default function Events() {
               <View style={{flex: 1.5}}>
                 <Image
                   source={require('../../../assets/chrd.png')}
-                  style={{height: 60, width: 75, borderRadius: 5}}
+                  style={{height: 90, width: 120, borderRadius: 5}}
                 />
               </View>
-              <View style={{flex: 2}}>
+              <View
+                style={{
+                  flex: 2,
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}>
                 <Text style={styles.eventNameText}>{event.name}</Text>
                 <Text style={styles.eventClubText}>{event.club}</Text>
+                <AirbnbRating
+                  count={5}
+                  defaultRating={5}
+                  size={16}
+                  reviewSize={0}
+                  starContainerStyle={{
+                    marginTop: -8,
+                    marginStart: -4,
+                  }}
+                  isDisabled={true}
+                  // onFinishRating={this.ratingCompleted}
+                />
               </View>
             </View>
             <View
@@ -79,26 +99,50 @@ export default function Events() {
     } else return null;
   };
   return !isLoading ? (
-    <ScrollView>
-      <View style={styles.mainContainer}>
-        <Text style={styles.eventsTitleText}>Events</Text>
-        {showEventCards()}
-      </View>
-    </ScrollView>
-  ) : (
-    <View style={styles.mainContainer}>
-      <ActivityIndicator
-        color={'#f1c644'}
-        size={36}
-        style={styles.activityIndicator}
+    <ImageBackground
+      source={require('../../../assets/bg.png')}
+      style={styles.image}>
+      <Image
+        source={require('../../../assets/TopImage.png')}
+        resizeMode="stretch"
+        style={styles.topImage}
       />
-    </View>
+      <Text style={styles.eventsTitleText}>Events</Text>
+      <ScrollView style={{flex: 1}}>
+        <View style={styles.mainContainer}>{showEventCards()}</View>
+      </ScrollView>
+    </ImageBackground>
+  ) : (
+    <ImageBackground
+      source={require('../../../assets/bg.png')}
+      style={styles.image}>
+      <View style={styles.mainContainer}>
+        <ActivityIndicator
+          color={'#f1c644'}
+          size={36}
+          style={styles.activityIndicator}
+        />
+      </View>
+    </ImageBackground>
   );
 }
 
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
-  mainContainer: {
+  topImage: {
+    width: '100%',
+    aspectRatio: 1,
+    position: 'absolute',
+    top: 0,
+    zIndex: 0,
+  },
+  image: {
     flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+  mainContainer: {
+    flex: 2,
     backgroundColor: '#efeeee',
     alignItems: 'center',
     marginHorizontal: 24,
@@ -113,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 12,
     width: '100%',
-    height: 150,
+    height: 180,
     marginBottom: 24,
   },
   eventsTitleText: {
@@ -126,6 +170,7 @@ const styles = StyleSheet.create({
   eventClubText: {
     fontSize: 18,
     fontFamily: 'Nunito-Regular',
+    marginTop: -8,
   },
   eventDetailText: {
     fontSize: 16,

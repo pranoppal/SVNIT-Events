@@ -5,18 +5,18 @@ export default persist(
   {
    
     getClubs : thunk((actions , payload) => {
-        return getClubsAPI(payload).then( details => {
+        return getClubsAPI().then( details => {
             return actions.updateDetails(details);
         })
     }),
 
 
 
-    updateDetails: action((state, payload) => {
-        return{
-            ...state,
-            ...payload,
-        }
-    })
+    // updateDetails: action((state, payload) => {
+    //     return{
+    //         ...state,
+    //         ...payload,
+    //     }
+    // })
   }
 );

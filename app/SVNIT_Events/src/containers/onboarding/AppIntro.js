@@ -13,7 +13,7 @@ export default function AppIntro() {
           <Image
             source={require('../../../assets/chrd.png')}
             style={styles.imageContainer}
-          />
+          />,
         </View>
         <Text style={styles.descText}>
           Hare Krishna, Hare Krishna, Krishna Krishna, Hare Hare, Hare Rama,Hare

@@ -11,18 +11,11 @@ const EventNavigator = ({navigation}) => (
     {/* <HomeStack.Screen
       name="AppIntro"
       component={AppIntro}
-      /> */}
-
-    <HomeStack.Screen
-      name="Events"
-      component={Events}
-    />
-
-    <HomeStack.Screen
-      name="SignUp"
-      component={SignUp}
       />
-    
+
+    <HomeStack.Screen name="SignUp" component={SignUp} /> */}
+
+    <HomeStack.Screen name="Events" component={Events} options={{headerShown:false}}/>
   </HomeStack.Navigator>
 );
 

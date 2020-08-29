@@ -9,6 +9,7 @@ const ClubNavigator = ({navigation}) => (
     <HomeStack.Screen
       name="Clubs"
       component={Clubs}
+      options={{headerShown:false}}
     />
     
   </HomeStack.Navigator>

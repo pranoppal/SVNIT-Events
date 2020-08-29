@@ -16,7 +16,6 @@ def getClubsController():
 
 @app.route("/events")
 def getEventsController():
-    print('asdfsdf')
     return getEvents()
 
 @app.route("/insertUser" , methods=['POST'])
