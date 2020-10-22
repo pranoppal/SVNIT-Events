@@ -9,7 +9,6 @@ import {
   ImageBackground,
   Dimensions,
   Animated,
-  Platform,
 } from 'react-native';
 import {useStoreState, useStoreActions} from 'easy-peasy';
 import {isEmpty} from 'lodash-es';
@@ -17,6 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {AirbnbRating} from 'react-native-ratings';
+import {TouchableRipple} from 'react-native-paper';
 
 import EVENTS_DATA from './dummy';
 
@@ -136,12 +136,16 @@ export default function Events() {
           <Animated.View
             style={[styles.toolbarContainer, {opacity: headerTitleOpacity}]}>
             <Text style={styles.eventTextToolbar}>Events</Text>
-            <MaterialIcons
-              name="notifications-active"
-              size={24}
-              color="#ffffff"
-              style={styles.notificationIconToolbar}
-            />
+            <TouchableRipple
+            onPress={() => console.log('Pressed')}
+            rippleColor="#ffffff">
+              <MaterialIcons
+                name="notifications-active"
+                size={24}
+                color="#ffffff"
+                style={styles.notificationIconToolbar}
+              />
+            </TouchableRipple>
           </Animated.View>
           <Animated.View
             style={[
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 21,
     justifyContent: 'center',
-    marginStart:24,
+    marginStart: 24,
     // position:'absolute',
     // left:0,
     // right:0,
@@ -225,7 +229,7 @@ const styles = StyleSheet.create({
   notificationIconToolbar: {
     alignSelf: 'center',
     justifyContent: 'flex-end',
-    marginEnd:24,
+    marginEnd: 24,
     // position:'absolute',
     // top:16,
     // right:24,
