@@ -18,7 +18,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {AirbnbRating} from 'react-native-ratings';
 import {TouchableRipple} from 'react-native-paper';
 
-import EVENTS_DATA from './dummy';
+import EVENTS_DATA from './Dummy';
 
 export default function Events({navigation}) {
   // const {events} = useStoreState(state => state.events);
@@ -59,49 +59,62 @@ export default function Events({navigation}) {
     // if (!isEmpty(events)) {
     const cards = EVENTS_DATA.map((event, index) => {
       return (
-        <View key={index} style={styles.cardContainer}>
-          <View style={styles.eventSecondaryContainer}>
-            <View style={{flex: 1.5}}>
-              <Image
-                source={require('../../../assets/chrd.png')}
-                style={styles.eventClubLogo}
-              />
+        <TouchableRipple
+          onPress={() => handleEventClick()}
+          rippleColor="#C80202"
+          key={index} 
+          >
+          <View style={styles.cardContainer}>
+            <View></View>
+            <View style={styles.eventSecondaryContainer}>
+              <View style={{flex: 1.5}}>
+                <Image
+                  source={require('../../../assets/chrd.png')}
+                  style={styles.eventClubLogo}
+                />
+              </View>
+              <View style={styles.eventTextDetailsContainer}>
+                <Text style={styles.eventNameText}>{event.name}</Text>
+                <Text style={styles.eventClubText}>{event.club}</Text>
+                <AirbnbRating
+                  count={5}
+                  defaultRating={5}
+                  size={16}
+                  reviewSize={0}
+                  starContainerStyle={{
+                    marginTop: -8,
+                    marginStart: -4,
+                  }}
+                  isDisabled={true}
+                  // onFinishRating={this.ratingCompleted}
+                />
+              </View>
             </View>
-            <View style={styles.eventTextDetailsContainer}>
-              <Text style={styles.eventNameText}>{event.name}</Text>
-              <Text style={styles.eventClubText}>{event.club}</Text>
-              <AirbnbRating
-                count={5}
-                defaultRating={5}
-                size={16}
-                reviewSize={0}
-                starContainerStyle={{
-                  marginTop: -8,
-                  marginStart: -4,
-                }}
-                isDisabled={true}
-                // onFinishRating={this.ratingCompleted}
-              />
+            <View style={styles.timeVenueContainer}>
+              <View style={styles.eventTimeContainer}>
+                <Feather name="clock" size={20} />
+                <Text style={styles.eventDetailText}>5PM</Text>
+              </View>
+              <View
+                style={[
+                  styles.eventTimeContainer,
+                  {justifyContent: 'flex-end'},
+                ]}>
+                <EvilIcons name="location" size={24} />
+                <Text style={styles.eventDetailText}>{event.venue}</Text>
+              </View>
             </View>
           </View>
-          <View style={styles.timeVenueContainer}>
-            <View style={styles.eventTimeContainer}>
-              <Feather name="clock" size={20} />
-              <Text style={styles.eventDetailText}>5PM</Text>
-            </View>
-            <View
-              style={[styles.eventTimeContainer, {justifyContent: 'flex-end'}]}>
-              <EvilIcons name="location" size={24} />
-              <Text style={styles.eventDetailText}>{event.venue}</Text>
-            </View>
-          </View>
-        </View>
-      );
-    });
-    return cards;
+        </TouchableRipple>
+      )
+    })
+    return cards
     // } else return null;
-  };
+  }
 
+  const handleEventClick = () => {
+    navigation.navigate('EventDetail')
+  };
   //TODO check which using native driver is better
   const onScrollEventDetails = () => {
     return Animated.event(

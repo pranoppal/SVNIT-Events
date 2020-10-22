@@ -5,6 +5,7 @@ import Events from '../src/containers/events/Events';
 import SignUp from '../src/containers/onboarding/SignUp';
 import AppIntro from '../src/containers/onboarding/AppIntro';
 import Notifications from '../src/containers/events/Notifications';
+import EventDetail from '../src/containers/events/EventDetail'
 const HomeStack = createStackNavigator();
 
 const EventNavigator = ({navigation}) => (
@@ -18,6 +19,7 @@ const EventNavigator = ({navigation}) => (
 
     <HomeStack.Screen name="Events" component={Events} options={{headerShown:false}}/>
     <HomeStack.Screen name="Notifications" component={Notifications} options={{headerShown:false}}/>
+    <HomeStack.Screen name="EventDetail" component={EventDetail} options={{headerShown:false}}/>
   </HomeStack.Navigator>
 );
 

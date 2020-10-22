@@ -7,7 +7,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import CLUBS_DATA from './dummy';
+import CLUBS_DATA from './Dummy';
 export default function Clubs() {
   const showClubsCards = () => {
     // if (!isEmpty(events)) {
