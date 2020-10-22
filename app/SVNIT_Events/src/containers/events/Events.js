@@ -20,9 +20,9 @@ import {TouchableRipple} from 'react-native-paper';
 
 import EVENTS_DATA from './dummy';
 
-export default function Events() {
-  const {events} = useStoreState(state => state.events);
-  const {getEvents} = useStoreActions(actions => actions.events);
+export default function Events({navigation}) {
+  // const {events} = useStoreState(state => state.events);
+  // const {getEvents} = useStoreActions(actions => actions.events);
   const [isLoading, setLoading] = useState(false);
 
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
@@ -54,32 +54,20 @@ export default function Events() {
     outputRange: [1, 0],
     extrapolate: 'clamp',
   });
-  const headerTitle = 'HEADER';
 
   const showEventCards = () => {
     // if (!isEmpty(events)) {
     const cards = EVENTS_DATA.map((event, index) => {
       return (
         <View key={index} style={styles.cardContainer}>
-          <View
-            style={{
-              flex: 2,
-              flexDirection: 'row',
-              marginHorizontal: 24,
-              marginTop: 24,
-            }}>
+          <View style={styles.eventSecondaryContainer}>
             <View style={{flex: 1.5}}>
               <Image
                 source={require('../../../assets/chrd.png')}
-                style={{height: 90, width: 120, borderRadius: 5}}
+                style={styles.eventClubLogo}
               />
             </View>
-            <View
-              style={{
-                flex: 2,
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-              }}>
+            <View style={styles.eventTextDetailsContainer}>
               <Text style={styles.eventNameText}>{event.name}</Text>
               <Text style={styles.eventClubText}>{event.club}</Text>
               <AirbnbRating
@@ -96,26 +84,13 @@ export default function Events() {
               />
             </View>
           </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginHorizontal: 24,
-              marginVertical: 8,
-              alignItems: 'center',
-            }}>
-            <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+          <View style={styles.timeVenueContainer}>
+            <View style={styles.eventTimeContainer}>
               <Feather name="clock" size={20} />
               <Text style={styles.eventDetailText}>5PM</Text>
             </View>
             <View
-              style={{
-                flexDirection: 'row',
-                flex: 1,
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-              }}>
+              style={[styles.eventTimeContainer, {justifyContent: 'flex-end'}]}>
               <EvilIcons name="location" size={24} />
               <Text style={styles.eventDetailText}>{event.venue}</Text>
             </View>
@@ -127,6 +102,35 @@ export default function Events() {
     // } else return null;
   };
 
+  //TODO check which using native driver is better
+  const onScrollEventDetails = () => {
+    return Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              y: scrollY,
+            },
+          },
+        },
+      ],
+      {useNativeDriver: false},
+    );
+  };
+
+  const handleNotificationClick = () => {
+    navigation.navigate('Notifications');
+  };
+
+  const notificationIcon = () => {
+    return (
+      <TouchableRipple
+        onPress={() => handleNotificationClick()}
+        rippleColor="#ffffff">
+        <MaterialIcons name="notifications-active" size={24} color="#ffffff" />
+      </TouchableRipple>
+    );
+  };
   return !isLoading ? (
     <ImageBackground
       source={require('../../../assets/bg.png')}
@@ -136,16 +140,9 @@ export default function Events() {
           <Animated.View
             style={[styles.toolbarContainer, {opacity: headerTitleOpacity}]}>
             <Text style={styles.eventTextToolbar}>Events</Text>
-            <TouchableRipple
-            onPress={() => console.log('Pressed')}
-            rippleColor="#ffffff">
-              <MaterialIcons
-                name="notifications-active"
-                size={24}
-                color="#ffffff"
-                style={styles.notificationIconToolbar}
-              />
-            </TouchableRipple>
+            <View style={styles.notificationIconToolbar}>
+              {notificationIcon()}
+            </View>
           </Animated.View>
           <Animated.View
             style={[
@@ -158,28 +155,15 @@ export default function Events() {
               style={styles.topImage}
             />
             <Text style={styles.eventsTitleText}>Events</Text>
-            <MaterialIcons
-              name="notifications-active"
-              size={24}
-              color="#ffffff"
-              style={styles.notificationIconExpanded}
-            />
+
+            <View style={styles.notificationIconExpanded}>
+              {notificationIcon()}
+            </View>
           </Animated.View>
         </Animated.View>
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    y: scrollY,
-                  },
-                },
-              },
-            ],
-            {useNativeDriver: false},
-          )}
+          onScroll={onScrollEventDetails()}
           scrollEventThrottle={16}>
           <View style={{flex: 1}}>{showEventCards()}</View>
         </ScrollView>
@@ -203,6 +187,27 @@ export default function Events() {
 const HEADER_EXPANDED_HEIGHT = 150;
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
+  eventClubLogo: {height: 90, width: 120, borderRadius: 5},
+  eventTimeContainer: {flexDirection: 'row', flex: 1, alignItems: 'center'},
+  eventSecondaryContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    marginHorizontal: 24,
+    marginTop: 24,
+  },
+  eventTextDetailsContainer: {
+    flex: 2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+  timeVenueContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 24,
+    marginVertical: 8,
+    alignItems: 'center',
+  },
   expandedToolbarContainer: {
     position: 'absolute',
     top: 0,
