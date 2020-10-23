@@ -60,12 +60,10 @@ export default function Events({navigation}) {
     const cards = EVENTS_DATA.map((event, index) => {
       return (
         <TouchableRipple
-          onPress={() => handleEventClick()}
-          rippleColor="#C80202"
-          key={index} 
+          onPress={() => handleEventClick(event)}
+          key={index}
           >
-          <View style={styles.cardContainer}>
-            <View></View>
+          <View style={styles.cardContainer} key={index} >
             <View style={styles.eventSecondaryContainer}>
               <View style={{flex: 1.5}}>
                 <Image
@@ -112,8 +110,10 @@ export default function Events({navigation}) {
     // } else return null;
   }
 
-  const handleEventClick = () => {
-    navigation.navigate('EventDetail')
+  const handleEventClick = (event) => {
+    navigation.navigate('EventDetail',{
+      event:event,
+    })
   };
   //TODO check which using native driver is better
   const onScrollEventDetails = () => {
@@ -147,7 +147,7 @@ export default function Events({navigation}) {
   return !isLoading ? (
     <ImageBackground
       source={require('../../../assets/bg.png')}
-      style={styles.image}>
+      style={styles.bgImage}>
       <View style={{flex: 1}}>
         <Animated.View style={[styles.header, {height: headerHeight}]}>
           <Animated.View
@@ -185,7 +185,7 @@ export default function Events({navigation}) {
   ) : (
     <ImageBackground
       source={require('../../../assets/bg.png')}
-      style={styles.image}>
+      style={styles.bgImage}>
       <View style={styles.mainContainer}>
         <ActivityIndicator
           color={'#f1c644'}
@@ -194,7 +194,7 @@ export default function Events({navigation}) {
         />
       </View>
     </ImageBackground>
-  );
+  )
 }
 
 const HEADER_EXPANDED_HEIGHT = 150;
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     top: 0,
     zIndex: 0,
   },
-  image: {
+  bgImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
@@ -301,7 +301,6 @@ const styles = StyleSheet.create({
   eventsTitleText: {
     fontSize: 24,
     fontFamily: 'Helvetica',
-    fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 8,
     color: '#ffffff',
